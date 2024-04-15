@@ -143,4 +143,4 @@ mp = ThreadPool(500)
 mp.map(main, target)
 mp.close()
 mp.join()
-
+main()
